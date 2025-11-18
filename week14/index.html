@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+</head>
+
+<body>
+    <button>Test</button>
+    <dialog id="messageDialog">
+        <p>Do you want to confirm your declaration</p>
+        <button id="okBtn">OK</button>
+        <button id="cancelBtn">Cancel</button>
+    </dialog>
+    <script type="module" src="./dialogTest.js">
+        async function displayDialog() {
+            return new Promise((resolve) => {
+                const dialogMessageEl = document.getElementById("messageDialog")
+
+                const okBtnEl = document.getElementById("okBtn")
+                const cancelBtnEl = document.getElementById("cancelBtn")
+
+                okBtnEl.addEventListener("click", () => {
+                    dialogMessageEl.close()
+                    resolve(okBtnEl.textContent)
+                })
+
+                cancelBtnEl.addEventListener("click", () => {
+                    dialogMessageEl.close()
+                    resolve(cancelBtnEl.textContent)
+                })
+                dialogMessageEl.showModal()
+            })
+
+            //   dialogMessageEl.show()
+        }
+
+        const ans = await displayDialog()
+        console.log(ans)
+
+    </script>
+</body>
+
+</html>
