@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <title>Keycloak Login</title>
+
+  <!-- CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/keycloak-js@latest/dist/keycloak.min.js"></script>
+</head>
+
+<body>
+  <script>
+    (async () => {
+
+      console.log("[KC] page start");
+
+      // 💥 เคลียร์ token เดิมทิ้งทันที (เพื่อบังคับให้ login ใหม่จริง)
+      sessionStorage.removeItem("kcToken");
+      sessionStorage.removeItem("kcRefreshToken");
+
+      const isLocal = ["localhost", "127.0.0.1", "::1"].includes(location.hostname);
+
+      // --- ✅ โปรดักชัน (ต้องมี / ท้าย URL) ---
+      const prodCfg = {
+        url: "https://bscit.sit.kmutt.ac.th/intproj25/ft/keycloak/",  // ← แก้ที่นี่
+        realm: "itb-ecors",
+        clientId: "itb-ecors-ssi2"
+      };
+
+      // --- โลคัล ---
+      const localCfg = {
+        url: "http://localhost:8080/",
+        realm: "ssi2",
+        clientId: "fe-app"
+      };
+
+      // --- ใช้ cfg ที่ถูกต้อง ---
+      const cfg = isLocal ? localCfg : prodCfg;
+
+      // --- redirect สร้างจาก path ปัจจุบัน (ใช้ได้ทุก env) ---
+      const redirectTo = new URL("./reserve.html", location.href).href;
+
+
+      const keycloak = new Keycloak(cfg);
+
+      console.log("[KC] init start", cfg, { redirectTo });
+
+      try {
+        const authenticated = await keycloak.init({
+          onLoad: "login-required",
+          checkLoginIframe: false,
+          pkceMethod: "S256"
+        });
+
+        console.log("[KC] init done, authenticated =", authenticated);
+
+        if (!authenticated) {
+          console.log("[KC] not authenticated → keycloak.login() with prompt=login");
+          await keycloak.login({
+            redirectUri: redirectTo,
+            prompt: "login",   // 🟢 เพิ่มบรรทัดนี้
+          });
+          return;
+        }
+
+        // --- บันทึก token ลง sessionStorage ---
+        sessionStorage.setItem("kcToken", keycloak.token);
+        sessionStorage.setItem("kcRefreshToken", keycloak.refreshToken);
+        sessionStorage.setItem("kcIdToken", keycloak.idToken);   // 🆕 เพิ่มบรรทัดนี้
+
+
+        // refresh token อัตโนมัติ
+        setInterval(async () => {
+          try {
+            const refreshed = await keycloak.updateToken(30);
+            if (refreshed) sessionStorage.setItem("kcToken", keycloak.token);
+          } catch (e) {
+            console.error("[KC] refresh error", e);
+          }
+        }, 15000);
+
+        // สำเร็จ → ไปหน้า reserve
+        location.href = redirectTo;
+
+      } catch (err) {
+        console.error("[KC] init error", err);
+        alert("Authentication error. Please refresh this page.");
+        location.href = "./index.html";
+      }
+
+    })();
+  </script>
+</body>
+
+</html>

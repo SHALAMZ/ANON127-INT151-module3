@@ -1,0 +1,176 @@
+/* ========================================
+   Course Offering Cards Styles
+   ======================================== */
+
+.course-offering-card {
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(212, 228, 247, 0.5);
+    border-radius: 12px;
+    padding: 16px 20px;
+    margin: 12px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.05);
+    transition: all 0.2s ease;
+}
+
+.course-offering-card:hover {
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    transform: translateY(-2px);
+}
+
+.course-offering-info {
+    flex: 1;
+}
+
+.course-code {
+    font-weight: 700;
+    font-size: 1rem;
+    color: #1b4f91;
+    margin-bottom: 4px;
+}
+
+.course-title {
+    font-size: 0.9rem;
+    color: #333;
+    margin-bottom: 4px;
+}
+
+.course-credits {
+    font-size: 0.85rem;
+    color: #666;
+}
+
+.course-offering-actions {
+    margin-left: 20px;
+    display: flex;
+    gap: 10px;
+}
+
+.button-reserve,
+.button-remove {
+    padding: 10px 24px;
+    border-radius: 8px;
+    border: none;
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+/* Reserve Button - Blue when active, Gray when disabled */
+.button-reserve {
+    background-color: #4285f4;
+    color: white;
+}
+
+.button-reserve:hover:not([disabled]) {
+    background-color: #3367d6;
+    transform: scale(1.05);
+}
+
+.button-reserve:active:not([disabled]) {
+    transform: scale(0.98);
+}
+
+.button-reserve.disabled,
+.button-reserve[disabled] {
+    background-color: #d3d3d3;
+    color: #999;
+    cursor: not-allowed;
+}
+
+/* Remove Button - Red when active, Gray when disabled */
+.button-remove.disabled,
+.button-remove[disabled] {
+    background-color: #d3d3d3;
+    color: #999;
+    cursor: not-allowed;
+}
+
+.button-remove.active {
+    background-color: #dc3545;
+    color: white;
+}
+
+.button-remove.active:hover {
+    background-color: #c82333;
+    transform: scale(1.05);
+}
+
+.button-remove.active:active {
+    transform: scale(0.98);
+}
+
+/* ========================================
+   Dialog for Remove Confirmation
+   ======================================== */
+
+.ecors-dialog {
+    border: none;
+    border-radius: 16px;
+    padding: 24px 32px;
+    box-shadow: 0px 8px 24px rgba(0, 0, 0, 0.2);
+    min-width: 400px;
+    background: white;
+}
+
+.ecors-dialog::backdrop {
+    background: rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(4px);
+}
+
+.ecors-dialog-message {
+    font-size: 1rem;
+    color: #333;
+    margin: 0 0 24px 0;
+    text-align: center;
+}
+
+.ecors-dialog menu {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    padding: 0;
+    margin: 0;
+}
+
+.ecors-dialog-button-remove,
+.ecors-dialog-button-cancel {
+    padding: 10px 28px;
+    border-radius: 8px;
+    border: none;
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.ecors-dialog-button-remove{
+    background-color: #34568B;
+    color: white;
+}
+#reservationErrorOk {
+    padding: 10px 28px;
+    border-radius: 8px;
+    border: none;
+    font-size: 0.95rem;
+    background-color: #4285f4;
+    color: white;
+}
+
+.ecors-dialog-button-remove:hover {
+    background-color: #2a4570;
+}
+
+.ecors-dialog-button-cancel {
+    background-color: #34568B;
+    color: white;
+}
+
+.ecors-dialog-button-cancel:hover {
+    background-color: #2a4570;
+}

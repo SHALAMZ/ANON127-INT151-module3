@@ -1,0 +1,335 @@
+body {
+    display: flex;
+    height: 100vh;
+    flex-direction: column;
+    padding: 0;
+    margin: 0 20px;
+    margin-top: 20px;
+    font-family: 'Merriweather', serif;
+    font-family: 'Playfair Display', serif;
+    font-family: 'Lora', serif;
+    font-family: "Noto Sans Thai", system-ui, -apple-system, "Segoe UI", Arial, sans-serif;
+}
+
+.order {
+    height: 100px;
+    display: grid;
+    background: linear-gradient(135deg, #e6f0ff 0%, #0078D7 100%);
+    border-radius: 20px;
+    grid-template-columns: 30% 1fr 30%;
+    overflow: hidden;
+    margin-bottom: 20px;
+    padding-inline: 50px;
+    text-align: center;
+    align-items: center;
+    color: #fff;
+    font-size: 0.8em;
+}
+
+header img {
+    grid-column: 1;
+    height: 50%;
+    overflow: hidden;
+}
+
+.texthead {
+    grid-column: 2;
+}
+
+.signOut {
+    overflow: hidden;
+    grid-column: 3;
+    justify-self: end;
+    grid-template-columns: 1fr;
+    display: flex;
+    gap: 5em;
+    justify-content: space-around;
+}
+
+.signIn img {
+    height: 25px;
+    overflow: hidden;
+    margin-bottom: -20px;
+}
+
+
+
+/* main  */
+
+table {
+    border-collapse: collapse;
+    margin: 20px auto;
+
+}
+
+.section h2 {
+    text-align: center;
+}
+
+tr th {
+    background-color: #0078D7;
+    color: aliceblue;
+}
+
+th,
+td {
+    border: 1px solid #ddd;
+    padding: 10px 30px;
+    text-align: center;
+}
+
+#errorMessage {
+    background-color: #ffdfdf;
+    color: #ff0000;
+    border: solid 2px #ff0000;
+    padding: 20px;
+    border-radius: 20px;
+    font-weight: 500;
+}
+
+
+
+/* footer */
+
+footer {
+    height: 50px;
+    background: linear-gradient(135deg, #e6f0ff 0%, #0078D7 100%);
+    border-radius: 20px;
+    text-align: center;
+    color: #e6f0ff;
+    position: relative;
+    bottom: 0;
+}
+
+.box-major {
+    max-width: 1200px;
+    margin: 40px auto;
+    background: var(--card);
+    border-radius: var(--radius);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, .06);
+    padding: 28px;
+}
+
+.ecors-button-manage {
+    display: flex;
+    justify-content: end;
+}
+
+.text-ecors-button-manage {
+    background: linear-gradient(135deg, #e6f0ff 0%, #0078D7 50%);
+    color: white;
+    border: #2ba0ff solid 1px;
+    border-radius: 10px;
+    height: 3em;
+    padding-inline: 20px;
+}
+
+.declare-section{
+    padding: 20px;
+}
+.ecors-dropdown-plan {
+    width: 70%;            /* 🔥 จาก 100% → 70% */
+    max-width: 480px;      /* ป้องกัน dropdown ใหญ่เกินบนจอใหญ่ */
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    border: 2px solid #e5e7eb;
+    border-radius: 12px;
+    padding: 14px 48px 14px 16px;
+    font-size: 16px;
+    line-height: 1.2;
+    transition: border-color .15s, box-shadow .15s;
+    background:
+        linear-gradient(45deg, transparent 50%, #9ca3af 50%),
+        linear-gradient(135deg, #9ca3af 50%, transparent 50%),
+        linear-gradient(to right, transparent, transparent);
+    background-position:
+        calc(100% - 22px) calc(50% - 3px),
+        calc(100% - 16px) calc(50% - 3px),
+        calc(100% - 2.5em) 0.5em;
+    background-size: 6px 6px, 6px 6px, 1px 1.5em;
+    background-repeat: no-repeat;
+}
+
+ .signOut { display:flex; align-items:center; gap:12px; }
+  .signOut button#btnSignOut{
+    background: transparent;
+    color: #fff;
+    border: 1.5px solid rgba(255,255,255,.65);
+    padding: 8px 14px;
+    border-radius: 10px;
+    cursor: pointer;
+    font: inherit;
+    transition: background .15s, transform .05s, border-color .15s;
+  }
+  .signOut button#btnSignOut:hover{
+    background: rgba(255,255,255,.15);
+    border-color: rgba(255,255,255,.9);
+  }
+  .signOut button#btnSignOut:active{
+    transform: translateY(1px);
+  }
+  
+  main{
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+  }
+  
+.declare-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: linear-gradient(0deg, #ffffff 0%, #e4f0fe 100%);
+    border-top: 1px solid #d4e4f7;
+    width: 80%; 
+    height: 200px;         
+    padding-top: 7%;      /* จาก 40px → 24px ให้บางลง */
+    margin: 0 auto;       /* ลดระยะห่างบน-ล่างลงนิดนึง */
+    border-radius: 20px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.04);
+    opacity: 1 ;
+}
+#majorManagementSection{
+    top: -100px;
+    position: relative;
+}
+
+
+.ecors-button-declare ,.ecors-button-change ,.ecors-button-cancel{
+    width: 15em;
+    margin: 10px 20px;
+    background-color: #258ce1;
+    border-radius: 10px;
+    border: 1px #058eff solid;
+    color: #ffffff;
+    padding: 10px 20px;
+    
+}
+
+.ecors-button-declare:hover,.ecors-button-change:hover ,.ecors-button-cancel:hover{
+    background:#cde0ec;
+    color: #3b48ff;
+}
+
+.ecors-declared-plan {
+    background: #ffffffeb;   
+    position: relative;
+    top: 0.5em;
+    z-index: 1;       
+    border-top: 1px solid #d4e4f7;         
+    border-radius: 20px;        
+    padding: 20px 30px;               
+    margin: 30px auto;             
+    width:60%;               
+    min-width: 320px;             
+    text-align: center;        
+    box-shadow: 0px 2px 6px rgba(0,0,0,0.05);
+}
+
+/* กันไม่ให้กล่องเด้งเวลาข้อความ declareStatus ยาว */
+.ecors-declared-plan p {
+    margin: 0;
+    min-height: 22px;                 
+    font-size: 1rem;
+}
+
+
+div[data-cy="period-box"]{
+    display: flex;
+    justify-content: center;
+    gap: 5rem; /* ระยะห่างระหว่างสองกล่อง */
+    margin-top: 20px;
+}
+
+/* กล่อง Current / Next message */
+div[data-cy="current-message-box"],
+div[data-cy="next-message-box"]  {
+    background: #eef6ff;    
+    padding: 20px 30px;
+    border-radius: 12px;
+    min-width: 280px;
+    text-align: center;
+    border: 1px solid #d4e4f7;      
+    box-shadow: 0px 2px 6px rgba(0,0,0,0.05);
+}
+
+
+/* หัวข้อ */
+div[data-cy="current-message-box"] h3,
+div[data-cy="next-message-box"] h3,
+div[data-cy="course-Reservations-box"] h3 {
+    margin: 0;
+    font-size: 1rem;
+    font-weight: 700;
+    color: #1b4f91;  /* น้ำเงินเข้ม */
+}
+
+/* แสดง Period */
+div[data-cy="current-message-box"] p,
+div[data-cy="next-message-box"] p {
+    margin-top: 8px;
+    font-size: 0.9rem;
+    min-height: 22px;  /* 🔥 สำคัญ – กัน layout เด้ง */
+    color: #333;
+}
+
+p[data-cy="core-course"]{
+    margin: 6px 0;
+    font-size: 0.9rem;
+    text-align: left;          /* ชิดซ้ายแบบรูป */
+    white-space: nowrap;       /* ไม่ตัดบรรทัด */
+    overflow: hidden;          /* กันล้น */
+    text-overflow: ellipsis;   /* ถ้ายาวมากให้ "..." */
+}
+[data-cy="core-courses-header"]     {
+    font-size: 1rem;
+    font-weight: 700;
+    color: #4488e0;
+    text-align: left;  /* ชิดซ้ายแบบตัวอย่าง */
+    margin: 0;
+}
+div[data-cy="course-Reservations-box"] h3 {
+    font-size: 1.3rem;
+}
+div[data-cy="course-Reservations-box"] {
+    background: #eef6ff;    
+    padding: 20px 30px;
+    border-radius: 20px;
+    width: 400px;               /* ปรับความกว้างให้ยาวขึ้น */
+    text-align: left;           /* ชิดซ้ายทั้งหมด */
+    border: 1px solid #d4e4f7;      
+    box-shadow: 0px 2px 6px rgba(0,0,0,0.05);
+}
+#manage-course-reservations{
+    width: 83%;
+    margin: auto;
+    position:relative;
+    top: -50px;
+    display: flex;
+    justify-content: space-between;
+}
+.course-offerings{
+    background: #eef6ff;    
+    padding: 20px 30px;
+    border-radius: 20px;
+    width: 79%;               /* ปรับความกว้างให้ยาวขึ้น */
+    text-align: left;           /* ชิดซ้ายทั้งหมด */
+    border: 1px solid #d4e4f7;      
+    box-shadow: 0px 2px 6px rgba(0,0,0,0.05);
+    margin: auto;
+}
+.course-offerings h3{
+    margin: 0;
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: #1b4f91;  /* น้ำเงินเข้ม */
+}
+
+
+ @media (max-width: 768px) {  /*ซ้อนกันเมื่อแคบลง */
+  div[data-cy="period-box"] {
+      flex-direction: column;
+      gap: 1.5rem;
+  }
+}

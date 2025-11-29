@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Lora&family=Merriweather&family=Playfair+Display&display=swap"
+        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@400;600&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <header>
+        <div class="order">
+            <img src="https://www.sit.kmutt.ac.th/wp-content/uploads/2024/11/1-1024x238.png" alt="logo">
+            <div class="texthead">
+                <h1>Study Plan & Course Reservation</h1>
+            </div>
+            <div class="signIn">
+                <!-- <img src="items/user-profile.png" alt=""> -->
+                <!-- <p>Sign In</p> -->
+            </div>
+        </div>
+
+    </header>
+    <main>
+        <a href="./reserve.html" style="text-decoration: none;">
+            <div class="ecors-button-manage">
+                <button id="btn-manage" class="text-ecors-button-manage">
+			Manage study plan declaration and course reservation
+                </button>
+            </div>
+        </a>
+        <section id="majorListSection" class="section">
+            <h2 class="stdplan">B.Sc.IT - Study Plans</h2>
+            <div id="majorList">
+                <table id="plansTable">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Study Code</th>
+                            <th>English Name</th>
+                            <th>Thai Name</th>
+                        </tr>
+                    </thead>
+                </table>
+            </div>
+        </section>
+
+    </main>
+
+    <footer>
+        <div class="textfoot">
+            <p>© 2025 School of Information Technology, KMUTT</p>
+
+        </div>
+    </footer>
+
+    <dialog class="ecors-dialog" closedby="none" id="errorDialog">
+        <p class="ecors-dialog-message">There is a problem. Please try again later.</p>
+    </dialog>
+
+    <script>
+        // ตรวจว่าอยู่ในเครื่อง dev หรือโปรดักชัน KMUTT
+        const isLocal =
+            location.hostname === "localhost" ||
+            location.hostname === "127.0.0.1" ||
+            location.hostname === "::1";
+
+        // ✅ โปรดักชันต้องมี prefix ของ path จริง
+        const apiBase = isLocal
+            ? "http://localhost:3000"
+            : "/intproj25/ssi2/itb-ecors";
+
+        const apiPath = "/api/v1/study-plans";
+        const url = `${apiBase}${apiPath}`;
+        console.log("Fetching:", url);
+
+        // ถ้ามี token ใน sessionStorage (จาก reserve.html) ก็แนบไปด้วย
+        const token = sessionStorage.getItem("kcToken") || "";
+        const headers = token ? { Authorization: `Bearer ${token}` } : {};
+
+        fetch(url, { headers })
+            .then((res) => {
+                // ✅ แก้ไข: ทุก error status (รวม 401, 500, 502) → throw error เพื่อแสดง dialog
+                // ไม่ redirect ไป keycloak.html
+                if (!res.ok) {
+                    throw new Error(`Bad status ${res.status}`);
+                }
+                return res.json();
+            })
+            .then((data) => {
+                const table = document.querySelector("#plansTable");
+                const oldTbody = table.querySelector("tbody");
+                if (oldTbody) oldTbody.remove();
+
+                if (Array.isArray(data) && data.length) {
+                    const tbody = document.createElement("tbody");
+                    let id = 1;
+                    data.forEach((plan) => {
+                        // รองรับชื่อ field แบบต่าง ๆ
+                        const planCode = plan.planCode ?? plan.plan_code ?? "";
+                        const nameEng = plan.nameEng ?? plan.name_eng ?? "";
+                        const nameTh = plan.nameTh ?? plan.name_th ?? "";
+
+                        const tr = document.createElement("tr");
+                        tr.className = "ecors-row";
+                        tr.innerHTML = `
+            <td class="ecors-id">${id++}</td>
+            <td class="ecors-planCode">${planCode}</td>
+            <td class="ecors-nameEng">${nameEng}</td>
+            <td class="ecors-nameTh">${nameTh}</td>
+          `;
+                        tbody.appendChild(tr);
+                    });
+                    table.appendChild(tbody);
+                }
+            })
+            .catch((err) => {
+                console.error("Fetch failed:", err);
+                const dialog = document.getElementById("errorDialog");
+                if (dialog) dialog.showModal();
+            });
+
+        // ถ้ามี token อยู่แล้ว (เคย login จาก reserve) → เปลี่ยนปุ่มให้ไป reserve.html
+        const hasToken = !!sessionStorage.getItem("kcToken");
+        if (hasToken) {
+            const manageLink = document.querySelector('a[href="./keycloak.html"]');
+            if (manageLink) manageLink.setAttribute("href", "./reserve.html");
+        }
+    </script>
+</body>
+
+</html>
