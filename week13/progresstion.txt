@@ -1,0 +1,27 @@
+แยกฟังก์ชัน CRUD ออกจากหน้าหลัก → ทำให้โค้ดเป็นระเบียบขึ้น (modular)
+getItems / deleteItem / addItem
+ได้รู้วิธีจัดการ Error แบบเป็นระบบ
+เช็ก res.status !== 200
+ทำ custom message เช่น 401, 404
+ใช้ throw new Error() เพื่อส่ง error กลับไปให้ layer ถัดไปจัดการ
+เข้าใจว่าการลบ (DELETE) ของ json-server จะไม่คืน body → ต้อง return id เอง
+เป็น behavior ของ json-server ที่ควรรู้เวลา mock API
+
+การใช้ headers: {"Content-Type": "application/json"} เวลา POST
+→ ทำให้สามารถส่งข้อมูลในรูป JSON ได้ถูกต้อง
+การ reuse ฟังก์ชันจาก fetchUtils.js ทำให้ไม่ต้องเขียน CRUD ซ้ำ
+→ แค่ห่อเพื่อให้เป็น loadQuotes(), deleteQuote(), addQuote()
+
+การจัดการ error แบบเพิ่ม prefix ชัดเจน เช่น
+throw new Error("Quote: ...")
+→ ช่วยให้รู้ทันทีว่า error มาจากส่วนไหน
+
+การประกอบ URL ด้วย import.meta.env.VITE_APP_URL
+→ เข้าใจการใช้ environment variable ใน Vite ให้แยก API base URL ออกจากโค้ดจริง
+เข้าใจ flow จริงของ CRUD:
+FE เรียกฟังก์ชัน quoteManagement
+quoteManagement ไปเรียก fetchUtils
+fetchUtils ใช้ fetch API
+ส่งผลลัพธ์กลับมาให้ UI render
+ได้เข้าใจเรื่องโครงสร้างการแยก Layer (Utility → Management → UI)
+และวิธีจัดการ API, Error, Env variables, และการใช้ fetch แบบ async/await อย่างถูกต้อง
